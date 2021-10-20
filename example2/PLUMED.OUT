@@ -1,0 +1,143 @@
+PLUMED: PLUMED is starting
+PLUMED: Version: 2.8.0-dev (git: 8a7111781-dirty) compiled on Jan 25 2021 at 15:03:54
+PLUMED: Please cite these papers when using PLUMED [1][2]
+PLUMED: For further information see the PLUMED web page at http://www.plumed.org
+PLUMED: Root: /export/home/kbal/plumed2/
+PLUMED: For installed feature, see /export/home/kbal/plumed2//src/config/config.txt
+PLUMED: Molecular dynamics engine: cp2k
+PLUMED: Precision of reals: 8
+PLUMED: Running over 1 node
+PLUMED: Number of threads: 1
+PLUMED: Cache line size: 512
+PLUMED: Number of atoms: 6
+PLUMED: File suffix: 
+PLUMED: FILE: ./plumed.inp
+PLUMED: Action UNITS
+PLUMED:   with label @0
+PLUMED:   length: A = 0.1 nm
+PLUMED:   energy: kj/mol
+PLUMED:   time: ps
+PLUMED:   charge: e
+PLUMED:   mass: amu
+PLUMED:   using physical units
+PLUMED:   inside PLUMED, Boltzmann constant is 0.00831446
+PLUMED: Action DISTANCE
+PLUMED:   with label d1
+PLUMED:   between atoms 1 2
+PLUMED:   using periodic boundary conditions
+PLUMED: Action DISTANCE
+PLUMED:   with label d2
+PLUMED:   between atoms 2 6
+PLUMED:   using periodic boundary conditions
+PLUMED: Action COMBINE
+PLUMED:   with label cv
+PLUMED:   with arguments d1 d2
+PLUMED:   with coefficients: 0.707000 -0.707000
+PLUMED:   with parameters: 0.000000 0.000000
+PLUMED:   and powers: 1.000000 1.000000
+PLUMED: Action UPPER_WALLS
+PLUMED:   with label constrain
+PLUMED:   with arguments d1 d2
+PLUMED:   added component to this action:  constrain.bias 
+PLUMED:   at 5.000000 5.000000
+PLUMED:   with an offset 0.000000 0.000000
+PLUMED:   with force constant 100.000000 100.000000
+PLUMED:   and exponent 2.000000 2.000000
+PLUMED:   rescaled 1.000000 1.000000
+PLUMED:   added component to this action:  constrain.force2 
+PLUMED: Action METAD
+PLUMED:   with label b1
+PLUMED:   with arguments d1 d2
+PLUMED:   added component to this action:  b1.bias 
+PLUMED:   Gaussian width  0.200000 0.200000  Gaussian height 1.000000
+PLUMED:   Gaussian deposition pace 200
+PLUMED:   Gaussian file HILLS
+PLUMED:   Well-Tempered Bias Factor 10.000000
+PLUMED:   Hills relaxation time (tau) 2.244904
+PLUMED:   KbT 2.494339
+PLUMED:   Grid min 1.0 1.0
+PLUMED:   Grid max 6.0 6.0
+PLUMED:   Grid bin 250 250
+PLUMED:   Grid uses spline interpolation
+PLUMED:   added component to this action:  b1.rbias 
+PLUMED:   added component to this action:  b1.rct 
+PLUMED:   The c(t) reweighting factor will be calculated every 1 hills
+PLUMED:   Bibliography [3][4][5]
+PLUMED: Action REWEIGHT_METAD
+PLUMED:   with label bias
+PLUMED:   with arguments b1.rbias
+PLUMED: Action HISTOGRAM
+PLUMED:   with label hh
+PLUMED:   with stride 1
+PLUMED:   with arguments d1 d2
+PLUMED:   weights are all equal to one
+PLUMED:   grid of 401 X 401 equally spaced points between (1.0,1.0) and (5.0,5.0)
+PLUMED: Action HISTOGRAM
+PLUMED:   with label hhw
+PLUMED:   with stride 1
+PLUMED:   with arguments d1 d2
+PLUMED:   reweighting using weights from bias 
+PLUMED:   grid of 401 X 401 equally spaced points between (1.0,1.0) and (5.0,5.0)
+PLUMED: Action HISTOGRAM
+PLUMED:   with label hh1d
+PLUMED:   with stride 1
+PLUMED:   with arguments cv
+PLUMED:   reweighting using weights from bias 
+PLUMED:   grid of 401 equally spaced points between (-2.0) and (2.0)
+PLUMED: Action CONVERT_TO_FES
+PLUMED:   with label ff
+PLUMED:   using 0th component of grid calculated by action hhw 
+PLUMED:   grid of 401 X 401 equally spaced points between (1.0,1.0) and (5.0,5.0)
+PLUMED: Action CONVERT_TO_FES
+PLUMED:   with label ff1d
+PLUMED:   using 0th component of grid calculated by action hh1d 
+PLUMED:   grid of 401 equally spaced points between (-2.0) and (2.0)
+PLUMED: Action DUMPGRID
+PLUMED:   with label @12
+PLUMED:   with stride 200000
+PLUMED:   outputting grid calculated by action hh to file named histo with format %f 
+PLUMED:   outputting data for replicas 0 Action DUMPGRID
+PLUMED:   with label @13
+PLUMED:   with stride 200000
+PLUMED:   outputting grid calculated by action hhw to file named histo_reweight with format %f 
+PLUMED:   outputting data for replicas 0 Action DUMPGRID
+PLUMED:   with label @14
+PLUMED:   with stride 200000
+PLUMED:   outputting grid calculated by action hh1d to file named histo1d with format %f 
+PLUMED:   outputting data for replicas 0 Action DUMPGRID
+PLUMED:   with label @15
+PLUMED:   with stride 200000
+PLUMED:   outputting grid calculated by action ff to file named fes with format %f 
+PLUMED:   outputting data for replicas 0 Action DUMPGRID
+PLUMED:   with label @16
+PLUMED:   with stride 200000
+PLUMED:   outputting grid calculated by action ff1d to file named fes1d with format %f 
+PLUMED:   outputting data for replicas 0 Action FLUSH
+PLUMED:   with label @17
+PLUMED:   with stride 2000
+PLUMED: Action PRINT
+PLUMED:   with label @18
+PLUMED:   with stride 200
+PLUMED:   with arguments d1 d2 cv b1.bias
+PLUMED:   on file colvar
+PLUMED:   with format  %f
+PLUMED: END FILE: ./plumed.inp
+PLUMED: Timestep: 0.000500
+PLUMED: KbT has not been set by the MD engine
+PLUMED: It should be set by hand where needed
+PLUMED: Relevant bibliography:
+PLUMED:   [1] The PLUMED consortium, Nat. Methods 16, 670 (2019)
+PLUMED:   [2] Tribello, Bonomi, Branduardi, Camilloni, and Bussi, Comput. Phys. Commun. 185, 604 (2014)
+PLUMED:   [3] Laio and Parrinello, PNAS 99, 12562 (2002)
+PLUMED:   [4] Barducci, Bussi, and Parrinello, Phys. Rev. Lett. 100, 020603 (2008)
+PLUMED:   [5] Pratyush and Parrinello, J. Phys. Chem. B, 119, 736 (2015)
+PLUMED: Please read and cite where appropriate!
+PLUMED: Finished setup
+PLUMED:                                               Cycles        Total      Average      Minimum      Maximum
+PLUMED:                                                    1  3031.193998  3031.193998  3031.193998  3031.193998
+PLUMED: 1 Prepare dependencies                        400000     0.850122     0.000002     0.000000     0.000033
+PLUMED: 2 Sharing data                                400000     0.464659     0.000001     0.000000     0.000025
+PLUMED: 3 Waiting for data                            200000     0.107767     0.000001     0.000000     0.000018
+PLUMED: 4 Calculating (forward loop)                  200000     3.668056     0.000018     0.000016     0.000054
+PLUMED: 5 Applying (backward loop)                    200000     1.150827     0.000006     0.000005     0.000054
+PLUMED: 6 Update                                      200000  3022.846111     0.015114     0.000141     1.539340
