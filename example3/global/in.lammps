@@ -1,0 +1,47 @@
+units           metal
+
+boundary        p p p
+
+atom_style      atomic
+atom_modify     map array
+atom_modify     sort 0 0.0
+lattice         bcc 4.29
+
+region          total block -2 3 -2 3 -2 3
+create_box      1 total
+create_atoms    1 region total
+
+pair_style      eam/fs
+pair_coeff      * * Na_MendelevM_2014.eam.fs Na
+
+neighbor        1.0 bin
+neigh_modify    every 1 delay 5 check yes
+timestep        0.002
+
+variable        t equal 375
+variable        p equal 1.0
+variable        tdamp equal 0.1
+variable        pdamp equal 10.0
+
+thermo          500
+thermo_style    custom step temp pe ke time etotal lx
+
+displace_atoms  all random 1.0 1.0 1.0 574621
+minimize        0 0 1000 10000
+
+fix             1 all nph iso $p $p ${pdamp}
+fix             2 all temp/csld $t $t 1.0 253571
+
+velocity        all create $t 4928459 mom yes dist gaussian
+run             12500
+
+unfix           2
+unfix           1
+reset_timestep  0
+
+fix             3 all plumed plumedfile plumed.inp outfile plumed.out
+fix             1 all nph iso $p $p ${pdamp}
+fix             2 all temp/csvr $t $t ${tdamp} 253571
+
+velocity        all create $t 4928459 mom yes dist gaussian
+run             50000000
