@@ -49,11 +49,11 @@ PLUMED: Action METAD
 PLUMED:   with label b1
 PLUMED:   with arguments d1 d2
 PLUMED:   added component to this action:  b1.bias 
-PLUMED:   Gaussian width  0.250000 0.250000  Gaussian height 1.000000
+PLUMED:   Gaussian width  0.250000 0.250000  Gaussian height 5.000000
 PLUMED:   Gaussian deposition pace 200
 PLUMED:   Gaussian file HILLS
 PLUMED:   Well-Tempered Bias Factor 10.000000
-PLUMED:   Hills relaxation time (tau) 2.244904
+PLUMED:   Hills relaxation time (tau) 0.448981
 PLUMED:   KbT 2.494339
 PLUMED:   Grid min 1.0 1.0
 PLUMED:   Grid max 6.0 6.0
@@ -134,10 +134,10 @@ PLUMED:   [5] Pratyush and Parrinello, J. Phys. Chem. B, 119, 736 (2015)
 PLUMED: Please read and cite where appropriate!
 PLUMED: Finished setup
 PLUMED:                                               Cycles        Total      Average      Minimum      Maximum
-PLUMED:                                                    1  3150.810759  3150.810759  3150.810759  3150.810759
-PLUMED: 1 Prepare dependencies                        400000     0.823900     0.000002     0.000000     0.000036
-PLUMED: 2 Sharing data                                400000     0.470084     0.000001     0.000000     0.000058
-PLUMED: 3 Waiting for data                            200000     0.121767     0.000001     0.000000     0.000022
-PLUMED: 4 Calculating (forward loop)                  200000     3.650091     0.000018     0.000015     0.000069
-PLUMED: 5 Applying (backward loop)                    200000     1.133503     0.000006     0.000005     0.000038
-PLUMED: 6 Update                                      200000  3142.510716     0.015713     0.000141     1.637506
+PLUMED:                                                    1  2796.027866  2796.027866  2796.027866  2796.027866
+PLUMED: 1 Prepare dependencies                        400000     0.745867     0.000002     0.000000     0.000016
+PLUMED: 2 Sharing data                                400000     0.424793     0.000001     0.000000     0.000008
+PLUMED: 3 Waiting for data                            200000     0.118307     0.000001     0.000000     0.000008
+PLUMED: 4 Calculating (forward loop)                  200000     3.193653     0.000016     0.000013     0.000032
+PLUMED: 5 Applying (backward loop)                    200000     1.033952     0.000005     0.000004     0.000027
+PLUMED: 6 Update                                      200000  2788.677983     0.013943     0.000140     1.463600
