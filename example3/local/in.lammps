@@ -40,8 +40,7 @@ unfix           1
 reset_timestep  0
 
 fix             3 all plumed plumedfile plumed.inp outfile plumed.out
-fix             1 all nph iso $p $p ${pdamp}
-fix             2 all temp/csvr $t $t ${tdamp} 253571
+fix             1 all npt temp $t $t ${tdamp} iso $p $p ${pdamp}
 
 velocity        all create $t 4928459 mom yes dist gaussian
 run             5000000
