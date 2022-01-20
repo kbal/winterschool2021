@@ -10,3 +10,5 @@ The most important points of interest and analysis are contained within the
 Usually, the notebooks should render directly inside the GitHub web interface, but its
 performance seems flaky at best. So, alternatively, you can use the 
 [nbviewer service](https://nbviewer.org/github/kbal/winterschool2021/tree/master/).
+
+The lecture slides associated with these notebooks are included in PDF format.
